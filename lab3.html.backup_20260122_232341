@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Лабораторная работа 3 - Управление оценками</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+        .grade-input {
+            width: 80px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .btn-group-custom {
+            margin: 25px 0;
+        }
+        .btn-group-custom .btn {
+            font-weight: bold;
+            padding: 12px;
+        }
+        table {
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+        .student-status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .status-excellent {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-good {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        .status-satisfactory {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-fail {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .result-alert {
+            margin-top: 25px;
+            display: none;
+        }
+        .quick-grades {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .footer-note {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Лабораторная работа 3</h1>
+        <h2>Система управления оценками студентов группы ИСТ-123</h2>
+        
+        <!-- Кнопки управления -->
+        <div class="row btn-group-custom">
+            <div class="col-md-4 mb-2">
+                <!-- ЗАДАНИЕ 1: Кнопка выставления оценок -->
+                <button class="btn btn-success w-100" id="setGradesBtn">
+                    <i class="bi bi-check-circle"></i> Выставить оценки
+                </button>
+            </div>
+            <div class="col-md-4 mb-2">
+                <!-- ЗАДАНИЕ 2: Кнопка очистки -->
+                <button class="btn btn-warning w-100" id="clearBtn">
+                    <i class="bi bi-trash"></i> Очистить все
+                </button>
+            </div>
+            <div class="col-md-4 mb-2">
+                <!-- ЗАДАНИЕ 3: Кнопка вычисления среднего балла -->
+                <button class="btn btn-primary w-100" id="calculateBtn">
+                    <i class="bi bi-calculator"></i> Средний балл
+                </button>
+            </div>
+        </div>
+        
+        <!-- Быстрые оценки -->
+        <div class="quick-grades">
+            <h5>Быстрое выставление оценок:</h5>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-success" data-grade="90">Отлично (90)</button>
+                <button type="button" class="btn btn-outline-primary" data-grade="75">Хорошо (75)</button>
+                <button type="button" class="btn btn-outline-warning" data-grade="60">Удовл. (60)</button>
+                <button type="button" class="btn btn-outline-danger" data-grade="40">Неуд. (40)</button>
+            </div>
+        </div>
+        
+        <!-- Таблица студентов -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th width="5%">#</th>
+                        <th>ФИО студента</th>
+                        <th width="20%">Оценка (0-100)</th>
+                        <th width="20%">Статус</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTable">
+                    <!-- Строки будут заполнены через JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Результат расчета -->
+        <div class="alert alert-info result-alert" id="resultAlert" role="alert">
+            <h4 class="alert-heading">Результаты расчета</h4>
+            <div id="resultContent">
+                <!-- Результаты будут добавлены через JavaScript -->
+            </div>
+            <hr>
+            <p class="mb-0">Для нового расчета нажмите "Средний балл"</p>
+        </div>
+        
+        <!-- Инструкция -->
+        <div class="alert alert-light border" role="alert">
+            <h5><i class="bi bi-info-circle"></i> Инструкция по использованию:</h5>
+            <ol class="mb-0">
+                <li><strong>Выставить оценки:</strong> Автоматически заполняет все поля случайными оценками от 40 до 100</li>
+                <li><strong>Очистить все:</strong> Удаляет все введенные оценки (устанавливает пустые значения)</li>
+                <li><strong>Средний балл:</strong> Рассчитывает и отображает средний балл по всей группе</li>
+                <li><strong>Быстрые оценки:</strong> Кнопки для быстрого выставления одинаковых оценок всем студентам</li>
+            </ol>
+        </div>
+        
+        <div class="footer-note">
+            Лабораторная работа №3 по дисциплине "Веб-программирование" | JavaScript функции для управления оценками
+        </div>
+    </div>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    
+    <!-- JavaScript код -->
+    <script>
+        // Данные студентов
+        const students = [
+            { id: 1, name: "Иванов Иван Иванович", grade: "" },
+            { id: 2, name: "Петрова Анна Сергеевна", grade: "" },
+            { id: 3, name: "Сидоров Алексей Владимирович", grade: "" },
+            { id: 4, name: "Кузнецова Мария Дмитриевна", grade: "" },
+            { id: 5, name: "Смирнов Дмитрий Петрович", grade: "" },
+            { id: 6, name: "Васильева Екатерина Андреевна", grade: "" },
+            { id: 7, name: "Попов Сергей Николаевич", grade: "" },
+            { id: 8, name: "Новикова Ольга Викторовна", grade: "" },
+            { id: 9, name: "Фёдоров Максим Алексеевич", grade: "" },
+            { id: 10, name: "Морозова Анастасия Викторовна", grade: "" }
+        ];
+
+        // Функция для определения статуса по оценке
+        function getStatus(grade) {
+            if (grade >= 85) return {text: "Отлично", class: "status-excellent"};
+            if (grade >= 70) return {text: "Хорошо", class: "status-good"};
+            if (grade >= 60) return {text: "Удовлетв.", class: "status-satisfactory"};
+            return {text: "Неудовл.", class: "status-fail"};
+        }
+
+        // Инициализация таблицы
+        function initializeTable() {
+            const tableBody = document.getElementById('studentsTable');
+            tableBody.innerHTML = '';
+            
+            students.forEach((student, index) => {
+                const status = student.grade ? getStatus(parseInt(student.grade)) : {text: "Нет оценки", class: ""};
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>
+                        <input type="number" 
+                               class="form-control grade-input" 
+                               id="grade${student.id}"
+                               min="0" 
+                               max="100"
+                               value="${student.grade}"
+                               onchange="updateStudent(${student.id}, this.value)">
+                    </td>
+                    <td>
+                        <span class="student-status ${status.class}" id="status${student.id}">
+                            ${status.text}
+                        </span>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Обновление студента
+        function updateStudent(id, grade) {
+            const student = students.find(s => s.id === id);
+            if (student) {
+                student.grade = grade;
+                const status = grade ? getStatus(parseInt(grade)) : {text: "Нет оценки", class: ""};
+                document.getElementById(`status${id}`).className = `student-status ${status.class}`;
+                document.getElementById(`status${id}`).textContent = status.text;
+            }
+        }
+
+        // ЗАДАНИЕ 1: Функция выставления оценок
+        function setRandomGrades() {
+            students.forEach(student => {
+                // Генерация случайной оценки от 40 до 100
+                const randomGrade = Math.floor(Math.random() * 61) + 40; // 40-100
+                student.grade = randomGrade;
+                
+                // Обновляем поле ввода
+                const input = document.getElementById(`grade${student.id}`);
+                if (input) {
+                    input.value = randomGrade;
+                }
+                
+                // Обновляем статус
+                updateStudent(student.id, randomGrade);
+            });
+            
+            // Скрываем предыдущие результаты
+            document.getElementById('resultAlert').style.display = 'none';
+            
+            // Показываем уведомление
+            showNotification('Оценки успешно выставлены!', 'success');
+        }
+
+        // ЗАДАНИЕ 2: Функция очистки всех полей
+        function clearAllGrades() {
+            if (confirm("Вы уверены, что хотите очистить все оценки?")) {
+                students.forEach(student => {
+                    student.grade = "";
+                    
+                    // Очищаем поле ввода
+                    const input = document.getElementById(`grade${student.id}`);
+                    if (input) {
+                        input.value = "";
+                    }
+                    
+                    // Обновляем статус
+                    updateStudent(student.id, "");
+                });
+                
+                // Скрываем результаты
+                document.getElementById('resultAlert').style.display = 'none';
+                
+                // Показываем уведомление
+                showNotification('Все оценки очищены!', 'info');
+            }
+        }
+
+        // ЗАДАНИЕ 3: Функция вычисления среднего балла
+        function calculateAverageGrade() {
+            const gradedStudents = students.filter(s => s.grade !== "" && !isNaN(parseInt(s.grade)));
+            
+            if (gradedStudents.length === 0) {
+                showNotification('Нет оценок для расчета! Сначала выставьте оценки.', 'warning');
+                return;
+            }
+            
+            const total = gradedStudents.reduce((sum, student) => sum + parseInt(student.grade), 0);
+            const average = (total / gradedStudents.length).toFixed(2);
+            
+            // Статистика
+            const excellent = gradedStudents.filter(s => parseInt(s.grade) >= 85).length;
+            const good = gradedStudents.filter(s => parseInt(s.grade) >= 70 && parseInt(s.grade) < 85).length;
+            const satisfactory = gradedStudents.filter(s => parseInt(s.grade) >= 60 && parseInt(s.grade) < 70).length;
+            const fail = gradedStudents.filter(s => parseInt(s.grade) < 60).length;
+            
+            // Формируем результат
+            const resultContent = document.getElementById('resultContent');
+            resultContent.innerHTML = `
+                <p><strong>Средний балл группы:</strong> <span class="display-6 text-primary">${average}</span></p>
+                <p><strong>Количество оценок:</strong> ${gradedStudents.length} из ${students.length}</p>
+                <hr>
+                <h6>Распределение оценок:</h6>
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <div class="p-2 bg-success text-white rounded">
+                            <div class="h4 mb-0">${excellent}</div>
+                            <small>Отлично</small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="p-2 bg-primary text-white rounded">
+                            <div class="h4 mb-0">${good}</div>
+                            <small>Хорошо</small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="p-2 bg-warning text-white rounded">
+                            <div class="h4 mb-0">${satisfactory}</div>
+                            <small>Удовл.</small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="p-2 bg-danger text-white rounded">
+                            <div class="h4 mb-0">${fail}</div>
+                            <small>Неуд.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <strong>Процент успеваемости:</strong> ${((excellent + good + satisfactory) / gradedStudents.length * 100).toFixed(1)}%
+                </div>
+            `;
+            
+            // Показываем результат
+            document.getElementById('resultAlert').style.display = 'block';
+            
+            // Показываем уведомление
+            showNotification(`Средний балл рассчитан: ${average}`, 'info');
+        }
+
+        // Функция для быстрого выставления одинаковых оценок
+        function setQuickGrade(grade) {
+            students.forEach(student => {
+                student.grade = grade;
+                
+                // Обновляем поле ввода
+                const input = document.getElementById(`grade${student.id}`);
+                if (input) {
+                    input.value = grade;
+                }
+                
+                // Обновляем статус
+                updateStudent(student.id, grade);
+            });
+            
+            // Скрываем предыдущие результаты
+            document.getElementById('resultAlert').style.display = 'none';
+            
+            // Показываем уведомление
+            showNotification(`Всем студентам выставлена оценка: ${grade}`, 'success');
+        }
+
+        // Вспомогательная функция для уведомлений
+        function showNotification(message, type) {
+            // Создаем временное уведомление
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 1050; min-width: 300px;';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // Автоматическое скрытие через 3 секунды
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализируем таблицу
+            initializeTable();
+            
+            // ЗАДАНИЕ 1: Назначаем обработчик для кнопки "Выставить оценки"
+            document.getElementById('setGradesBtn').addEventListener('click', setRandomGrades);
+            
+            // ЗАДАНИЕ 2: Назначаем обработчик для кнопки "Очистить все"
+            document.getElementById('clearBtn').addEventListener('click', clearAllGrades);
+            
+            // ЗАДАНИЕ 3: Назначаем обработчик для кнопки "Средний балл"
+            document.getElementById('calculateBtn').addEventListener('click', calculateAverageGrade);
+            
+            // Обработчики для быстрых оценок
+            document.querySelectorAll('[data-grade]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const grade = parseInt(this.getAttribute('data-grade'));
+                    setQuickGrade(grade);
+                });
+            });
+            
+            // Добавляем возможность нажатия Enter в полях ввода
+            document.querySelectorAll('.grade-input').forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calculateAverageGrade();
+                    }
+                });
+            });
+            
+            console.log('Система управления оценками загружена и готова к работе!');
+        });
+    </script>
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
