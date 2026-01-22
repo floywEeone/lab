@@ -1,0 +1,31 @@
+﻿<?php
+echo "<!DOCTYPE html>";
+echo "<html lang='ru'>";
+echo "<head>";
+echo "    <meta charset='UTF-8'>";
+echo "    <meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+echo "    <title>Тест PHP</title>";
+echo "    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'>";
+echo "    <style>";
+echo "        body { padding: 50px; background: #f8f9fa; }";
+echo "        .container { max-width: 600px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }";
+echo "    </style>";
+echo "</head>";
+echo "<body>";
+echo "    <div class='container text-center'>";
+echo "        <h1>✅ PHP работает корректно!</h1>";
+echo "        <div class='alert alert-success mt-4'>";
+echo "            <h4>Информация о сервере:</h4>";
+echo "            <p><strong>Версия PHP:</strong> " . phpversion() . "</p>";
+echo "            <p><strong>Сервер:</strong> " . $_SERVER['SERVER_SOFTWARE'] . "</p>";
+echo "            <p><strong>Метод запроса:</strong> " . $_SERVER['REQUEST_METHOD'] . "</p>";
+echo "            <p><strong>Дата:</strong> " . date('d.m.Y H:i:s') . "</p>";
+echo "        </div>";
+echo "        <div class='mt-4'>";
+echo "            <a href='start.html' class='btn btn-secondary'>← Назад</a>";
+echo "            <a href='index.html' class='btn btn-primary'>Перейти к форме расчета</a>";
+echo "        </div>";
+echo "    </div>";
+echo "</body>";
+echo "</html>";
+?>
