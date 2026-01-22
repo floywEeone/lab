@@ -1,0 +1,458 @@
+﻿/* Custom CSS for Bootstrap Example */
+
+/* Основные стили для лабораторной работы */
+.row-header {
+    margin: 0px auto;
+    padding: 0px;
+}
+
+.row-content {
+    margin: 0px auto;
+    padding: 50px 0px 50px 0px;
+    border-bottom: 1px ridge;
+    min-height: 400px;
+}
+
+.footer {
+    background-color: #D1C4E9;
+    margin: 0px auto;
+    padding: 20px 0px 20px 0px;
+}
+
+.jumbotron {
+    padding: 70px 30px 70px 30px;
+    margin: 0px auto;
+    background: #9575CD;
+    color: floralwhite;
+}
+
+address {
+    font-size: 80%;
+    margin: 0px;
+    color: #0f0f0f;
+}
+
+/* Навигация */
+.navbar-dark {
+    background-color: #512DA8;
+}
+
+body {
+    padding: 50px 0px 0px 0px;
+    z-index: 0;
+}
+
+/* Вкладки */
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+/* Карусель */
+.carousel {
+    background: #512DA8;
+}
+
+.carousel-item {
+    height: 300px;
+}
+
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
+
+#carouselButton {
+    right: 0px;
+    position: absolute;
+    bottom: 0px;
+    z-index: 1;
+}
+
+/* Стили для лабораторной работы */
+.lab-feature {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.team-card {
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Демонстрация адаптивных утилит */
+.responsive-demo {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.d-none-example {
+    background-color: #ffebee;
+    border-left: 4px solid #f44336;
+}
+
+.d-sm-block-example {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+}
+
+/* Карточки команды */
+.card-team {
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-team:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+}
+
+.team-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 3px solid #3498db;
+    padding: 3px;
+}
+
+/* Формула вычисления */
+.formula-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+/* Аккордеон */
+.accordion-custom .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.accordion-custom .btn-link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.accordion-custom .btn-link:hover {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+/* Стили для очень маленьких экранов (адаптивные утилиты) */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
+/* Медиа-запросы для адаптивности */
+
+/* Очень маленькие экраны (меньше 576px) */
+@media (max-width: 575.98px) {
+    .jumbotron h1 {
+        font-size: 1.8rem;
+    }
+    
+    .jumbotron p {
+        font-size: 1rem;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .row-content {
+        padding: 30px 0px;
+        min-height: 300px;
+    }
+    
+    .card-body {
+        padding: 10px;
+    }
+    
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    h4 {
+        font-size: 1.1rem;
+    }
+    
+    .formula-box {
+        font-size: 1em;
+        padding: 15px;
+    }
+}
+
+/* Маленькие экраны (от 576px до 767px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .row-content {
+        padding: 40px 0px;
+    }
+    
+    .jumbotron {
+        padding: 50px 20px;
+    }
+    
+    .carousel-item {
+        height: 250px;
+    }
+}
+
+/* Средние экраны (от 768px до 991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .row-content {
+        padding: 50px 0px;
+    }
+    
+    .team-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .carousel-item {
+        height: 350px;
+    }
+}
+
+/* Большие экраны (от 992px до 1199px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .jumbotron h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Очень большие экраны (1200px и больше) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+    .jumbotron h1 {
+        font-size: 3rem;
+    }
+}
+
+/* Стили для печати */
+@media print {
+    .navbar, 
+    .footer, 
+    .carousel,
+    .btn,
+    .modal {
+        display: none !important;
+    }
+    
+    body {
+        padding-top: 0 !important;
+    }
+    
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    a {
+        text-decoration: none !important;
+        color: #000 !important;
+    }
+    
+    .row-content {
+        border-bottom: 1px solid #000 !important;
+    }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Стили для форм */
+.form-custom .form-control {
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    transition: border-color 0.3s ease;
+}
+
+.form-custom .form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* Стили для кнопок */
+.btn-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+/* Утилитарные классы */
+.text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.shadow-soft {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-lg {
+    border-radius: 15px;
+}
+
+/* Стили для списков */
+.list-custom {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.list-custom li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.list-custom li:last-child {
+    border-bottom: none;
+}
+
+.list-custom li i {
+    color: #3498db;
+    margin-right: 10px;
+}
+
+/* Стили для иконок социальных сетей */
+.social-icons a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #3498db;
+    color: white;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+/* Стили для прогресс-баров */
+.progress-custom {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #e9ecef;
+}
+
+.progress-custom .progress-bar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 5px;
+}
+
+/* Стили для алертов */
+.alert-custom {
+    border-radius: 10px;
+    border: none;
+}
+
+.alert-info-custom {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-left: 4px solid #17a2b8;
+}
+
+.alert-success-custom {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.alert-warning-custom {
+    background-color: #fff3cd;
+    color: #856404;
+    border-left: 4px solid #ffc107;
+}
+
+/* Стили для таблиц */
+.table-custom {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-custom thead th {
+    background-color: #3498db;
+    color: white;
+    border: none;
+}
+
+.table-custom tbody tr:hover {
+    background-color: #f8f9fa;
+}

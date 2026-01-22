@@ -1,0 +1,58 @@
+﻿=======================================
+ИНСТРУКЦИЯ: РЕШЕНИЕ ЗАДАЧИ "КНОПКА ПРИВЕТ"
+=======================================
+
+Созданные файлы:
+
+1. hello_button_solution.html - Полное решение с объяснениями
+2. hello_minimal.html        - Минимальное решение
+
+=======================================
+ОСНОВНОЙ КОД РЕШЕНИЯ ЗАДАЧИ:
+=======================================
+
+HTML часть:
+<button id="helloButton">Привет</button>
+
+JavaScript часть:
+<script>
+    document.getElementById('helloButton').onclick = function() {
+        alert('Привет Мир!');
+    };
+</script>
+
+ИЛИ более современный вариант:
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const button = document.getElementById('helloButton');
+        button.addEventListener('click', function() {
+            alert('Привет Мир!');
+        });
+    });
+</script>
+
+=======================================
+КАК ВСТАВИТЬ ЭТОТ КОД В ВАШ lab3.html:
+=======================================
+
+1. Откройте файл lab3.html
+2. Найдите место, куда хотите добавить кнопку "Привет"
+3. Вставьте HTML код кнопки:
+   <button class="btn btn-success" id="helloButton">Привет</button>
+
+4. Добавьте JavaScript код в конце файла перед </script>:
+   document.getElementById('helloButton').addEventListener('click', function() {
+       alert('Привет Мир!');
+   });
+
+=======================================
+ПРОВЕРКА РЕШЕНИЯ:
+=======================================
+
+1. Откройте hello_button_solution.html в браузере
+2. Нажмите на кнопку "Привет"
+3. Должно появиться окно с текстом "Привет Мир!"
+
+Файлы созданы в папке: D:\UwAmp\www\Lab1
+Дата создания: ' + (Get-Date -Format "dd.MM.yyyy HH:mm:ss") + '
+=======================================
